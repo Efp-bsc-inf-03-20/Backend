@@ -14,16 +14,16 @@ export class OpdController {
     @ApiResponse({ status: 200, description: 'opd patient  created Successful ' })
     async CreateOPDPatient(@Body() opdDto: CreateOpdDto): Promise<void> {
       try {
+          if ((opdDto.Amount === null && opdDto.MedicalScheme === null) ||
+              (opdDto.Amount !== null && opdDto.MedicalScheme !== null)) {
+              throw new HttpException("Either Amount or MedicalScheme should be entered, but not both.", HttpStatus.BAD_REQUEST);
+          }
           await this.OpdServices.CreateOPDPatient(opdDto);
       } catch (error) {
-          if (error.message === 'Either Amount or MedicalScheme should be entered, but not both.') {
-              throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
-          } else {
-              throw new HttpException('An error occurred while creating the OPD patient', HttpStatus.INTERNAL_SERVER_ERROR);
-          }
+          throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
       }
   }
-
+  
     @Get()
     @ApiOperation({summary:'get all opd patients'})
     @ApiResponse({ status: 200, description: 'return all opd patients ' })

@@ -37,11 +37,11 @@ import { PharmacySalesService } from './pharmacy_sales/pharmacy_sales.service';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'postgres',
+     type: 'postgres',
       host: 'localhost',
       port: 5432,
       username:'postgres',
-      database:'liwondeprivatehospital',
+     database:'liwondeprivatehospital',
       password:'1234',
       //url:"postgres://jhxtzhpp:Ax7lDlN81kXio7XGO4Zi_S_QC8Tj3W7d@baasu.db.elephantsql.com/jhxtzhpp",
     

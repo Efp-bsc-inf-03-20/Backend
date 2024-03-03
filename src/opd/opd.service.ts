@@ -26,10 +26,12 @@ export class OpdService {
         return queryBuilder.getMany();
     }
     async CreateOPDPatient(OpdDetails: createOpdParams): Promise<void> {
-        if ((OpdDetails.Amount !== null && OpdDetails.MedicalScheme !== null) ||
-            (OpdDetails.Amount === null && OpdDetails.MedicalScheme === null)) {
+        if ((OpdDetails.Amount === null && OpdDetails.MedicalScheme === null) ||
+            (OpdDetails.Amount !== null && OpdDetails.MedicalScheme !== null)) {
             throw new HttpException("Either Amount or MedicalScheme should be entered, but not both.", HttpStatus.BAD_REQUEST);
         }
+        // Your service logic here
+    
 
         const newOPDPatient = this.OPDRepository.create({
             FirstName: OpdDetails.FirstName,
