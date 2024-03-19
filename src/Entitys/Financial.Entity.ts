@@ -82,6 +82,7 @@ export class DaySummary {
       const result = await Financial.getRepository()
         .createQueryBuilder('financial')
         .select('SUM(financial.Amount)', 'totalAmount')
+        
         .getRawOne();
 
       const totalAmount = result.totalAmount || 0;
