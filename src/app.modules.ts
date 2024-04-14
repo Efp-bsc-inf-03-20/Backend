@@ -43,7 +43,7 @@ import { PharmacySalesService } from './pharmacy_sales/pharmacy_sales.service';
       username:'postgres',
      database:'liwondeprivatehospital',
       password:'1234',
-      url:"postgres://jhxtzhpp:Ax7lDlN81kXio7XGO4Zi_S_QC8Tj3W7d@baasu.db.elephantsql.com/jhxtzhpp",
+     url:"postgres://jhxtzhpp:Ax7lDlN81kXio7XGO4Zi_S_QC8Tj3W7d@baasu.db.elephantsql.com/jhxtzhpp",
     
       entities: [Reception, OPD, Pharmacy, Financial, DaySummary,Backstore,Xray,Laboratory,PhamarcySales,Dental,Vitals],
       synchronize: true,

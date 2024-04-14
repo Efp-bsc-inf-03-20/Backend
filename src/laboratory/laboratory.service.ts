@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Laboratory } from 'src/Entitys/Laborotary.Entity';
 import { Repository } from 'typeorm';
+import { LabItem } from '../interfaces/lab-item.interface';
 import { CreateLaborotoryParams, UpdateLaborotoryParams } from './Utils/types';
 
 @Injectable()
@@ -29,13 +30,16 @@ export class LaboratoryService {
   }
   
   
-  async  createLaborotoryPatient(LaborotaryDetails:CreateLaborotoryParams): Promise<void> {
-    const newpatientonLaborotory=this.LaboraotyRepository.create({
-        ...LaborotaryDetails,
-        Date:new Date(),
-
-    })
-    await this.LaboraotyRepository.save(newpatientonLaborotory);
+// Update the createLaborotoryPatient method to accept LabItem as input
+async createLaborotoryPatient(labItem: LabItem): Promise<void> {
+    const newPatientOnLaborotory = this.LaboraotyRepository.create({
+        FirstName: labItem.FirstName,
+        LastName: labItem.LastName,
+        PaymentMethod: labItem.PaymentMethod,
+        TestOrdered: labItem.TestOrdered,
+        Date: new Date(),
+    });
+    await this.LaboraotyRepository.save(newPatientOnLaborotory);
 }
 
   async countPatients(): Promise<number> {
