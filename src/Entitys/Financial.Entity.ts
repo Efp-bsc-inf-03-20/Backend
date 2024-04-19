@@ -35,10 +35,10 @@ export class Financial {
   @IsDate({ message: 'Date should be a valid date' })
   Date: Date;
 
-  // Static method to get the repository for the Financial entity
-  static getRepository() {
-    return getRepository(Financial);
-  }
+  @Column({ default: 0 }) // Default DayTotal to 0
+  DayTotal: number;
+
+  
 }
 
 @Entity()
@@ -56,7 +56,7 @@ export class DaySummary {
   @IsNotEmpty({ message: 'Expenditure should not be empty' })
   @IsNumber({}, { message: 'Expenditure should be a number' })
   @IsPositive({ message: 'Expenditure should be a positive number' })
-  Expinditure: number;
+  Expenditure: number;
 
   @Column()
   @IsNotEmpty({ message: 'Banking should not be empty' })
@@ -65,31 +65,13 @@ export class DaySummary {
   Banking: number;
 
   @Column()
-  @IsNotEmpty({ message: 'cashinhand should not be empty' })
-  @IsNumber({}, { message: 'cashinhand should be a number' })
-  @IsPositive({ message: 'cashinhand should be a positive number' })
+  @IsNotEmpty({ message: 'CashInHand should not be empty' })
+  @IsNumber({}, { message: 'CashInHand should be a number' })
+  @IsPositive({ message: 'CashInHand should be a positive number' })
   CashInHand: number;
 
   @Column()
   @IsDate({ message: 'Date should be a valid date' })
   Date: Date;
 
-  // Hook to recalculate DayTotal and Expinditure after Financial entity is inserted or updated
-  @AfterInsert()
-  @AfterUpdate()
-  async recalculateValues() {
-    try {
-      const result = await Financial.getRepository()
-        .createQueryBuilder('financial')
-        .select('SUM(financial.Amount)', 'totalAmount')
-        
-        .getRawOne();
-
-      const totalAmount = result.totalAmount || 0;
-      this.DayTotal = totalAmount;
-      this.Expinditure = this.DayTotal - this.CashInHand;
-    } catch (error) {
-      console.error('Error calculating DayTotal and Expinditure:', error);
-    }
-  }
 }

@@ -33,6 +33,9 @@ import { VitalsController } from './vitals/vitals.controller';
 import { VitalsService } from './vitals/vitals.service';
 import { PharmacySalesController } from './pharmacy_sales/pharmacy_sales.controller';
 import { PharmacySalesService } from './pharmacy_sales/pharmacy_sales.service';
+import { User } from './Entitys/User.staff.entity';
+import { StaffService } from './staff/staff.service';
+import { StaffController } from './staff/staff.controller';
 
 @Module({
   imports: [
@@ -45,10 +48,10 @@ import { PharmacySalesService } from './pharmacy_sales/pharmacy_sales.service';
       password:'1234',
      url:"postgres://jhxtzhpp:Ax7lDlN81kXio7XGO4Zi_S_QC8Tj3W7d@baasu.db.elephantsql.com/jhxtzhpp",
     
-      entities: [Reception, OPD, Pharmacy, Financial, DaySummary,Backstore,Xray,Laboratory,PhamarcySales,Dental,Vitals],
+      entities: [Reception, User,OPD, Pharmacy, Financial, DaySummary,Backstore,Xray,Laboratory,PhamarcySales,Dental,Vitals],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Backstore,Pharmacy,Reception,OPD,Financial,DaySummary,Xray,Laboratory,PhamarcySales,Dental,Vitals]), 
+    TypeOrmModule.forFeature([Backstore,User,Pharmacy,Reception,OPD,Financial,DaySummary,Xray,Laboratory,PhamarcySales,Dental,Vitals]), 
   ],
   providers: [
     BackstoreService,
@@ -56,7 +59,7 @@ import { PharmacySalesService } from './pharmacy_sales/pharmacy_sales.service';
     PhamarcyServices,
     FinancialService,
     ReceptionService,
-    LaboratoryService,
+    LaboratoryService,StaffService,
     XRayService,
     DentalService,
     OpdService,
@@ -74,7 +77,7 @@ import { PharmacySalesService } from './pharmacy_sales/pharmacy_sales.service';
     Dental,
     Vitals
   ],
-  controllers: [
+  controllers: [StaffController,
     AppController,
     FinancialController,
     BackstoreController,
