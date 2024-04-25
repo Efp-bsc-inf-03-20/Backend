@@ -4,6 +4,8 @@ import { Financial } from 'src/Entitys/Financial.Entity';
 import { Repository } from 'typeorm';
 import { UpdateFinanceDto } from './dtos/UpdatedFinance.dto';
 import { UpdateFinanceParams, createFinanceParams } from './utils/types';
+import { FinanceItem } from './interfaces/FinanceItem';
+import { CreateFinanceDTO } from './dtos/financial.dto';
 
 @Injectable()
 export class FinancialService {
@@ -27,17 +29,29 @@ export class FinancialService {
         return queryBuilder.getMany();
     }
 
-  
-  
-  async  createFinancialPatient(FinancialDetails:createFinanceParams): Promise<void> {
-    const newpatientonreception=this.FinancialRepository.create({
-        ...FinancialDetails,
-        Date:new Date(),
 
-    })
-    await this.FinancialRepository.save(newpatientonreception);
-}
 
+    async createFinancialPatient(financialItem:FinanceItem): Promise<void> {
+        const newPatientOnFinance = this.FinancialRepository.create({
+       
+            FirstName:financialItem.FirstName,
+            LastName:financialItem.LastName,
+            Treatment:financialItem.Treatment,
+            Amount:financialItem.Amount,
+            PaymentMethod:financialItem.Treatment,
+            Date:new Date(),
+          
+        
+      
+        });
+        await this.FinancialRepository.save(newPatientOnFinance);
+    }
+    
+  
+
+
+
+  
   
     async countPatients(): Promise<number> {
         const count = await this.FinancialRepository.count();

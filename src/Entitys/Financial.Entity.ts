@@ -4,7 +4,7 @@ import { IsNotEmpty, IsString, IsNumber, IsDate, IsPositive } from 'class-valida
 @Entity()
 export class Financial {
   @PrimaryGeneratedColumn()
-  id: number;
+  ID: number;
 
   @Column({ nullable: false })
   @IsNotEmpty({ message: 'First Name should not be empty' })
@@ -35,11 +35,18 @@ export class Financial {
   @IsDate({ message: 'Date should be a valid date' })
   Date: Date;
 
-  @Column({ default: 0 }) // Default DayTotal to 0
-  DayTotal: number;
+ // @Column({ default: 0 }) // Default DayTotal to 0
+  //DayTotal: number;
 
   
 }
+
+
+
+
+
+
+
 
 @Entity()
 export class DaySummary {

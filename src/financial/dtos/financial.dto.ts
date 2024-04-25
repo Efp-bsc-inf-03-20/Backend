@@ -1,6 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateFinanceDTO {
+   ID:number;
+
     @ApiProperty({ description: 'First name of the patient' })
     FirstName: string;
 
@@ -15,7 +17,12 @@ export class CreateFinanceDTO {
 
     @ApiProperty({ description: 'Payment method used' })
     PaymentMethod: string;
+
+   Date:Date;
 }
+
+
+
 
 export class DaySummaryDto {
     @ApiProperty({ description: 'Banking amount for the day' })
@@ -24,3 +31,4 @@ export class DaySummaryDto {
     @ApiProperty({ description: 'Cash in hand amount for the day' })
     CashInHand: number;
 }
+
